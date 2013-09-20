@@ -1,6 +1,6 @@
 # Auto Hathway Login 
 
-This is a small script that will log you in automatically if Hathway logs you out. Hathway logs you out every few hours and this is very annoying while downloading huge files
+This is a small script that will log you in automatically if Hathway logs you out. Hathway kicks you out every few hours and this is very annoying while downloading huge files. This script requires Python 2.7
 
 Usage:
 
