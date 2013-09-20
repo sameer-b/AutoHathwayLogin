@@ -9,7 +9,7 @@ python AutoHathwayLogin.py <username> <password> <sleep time in seconds>
 
 ```
 
-Where username is your hathway email, password is your password and sleeo time is the time between 2 consecutive internet connectivity tests. You can alternatively save username and password in the variables in the file and simply run by typing
+Where username is your hathway email, password is your password and sleep time is the time between 2 consecutive internet connectivity tests and default is 30seconds. You can alternatively save username and password in the variables in the file and simply run by typing
 
 ```
 python AutoHathwayLogin.py
