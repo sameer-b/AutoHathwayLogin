@@ -16,47 +16,54 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  '''
-import httplib, urllib2, sys, time
-postUrl=None
+import urllib2, sys, time, socket
+
+userName="USERNAME"
+password="PASSWORD"
+
 sleepTime=30
+socket.setdefaulttimeout(sleepTime)
+
+hostname = ['login.hathway.com', '203.212.193.60', '203.212.193.61']
+url = "/bsp/login.do?action=doLoginSubmit&flowId=UserLogin&username=" + userName + "&password=" + password
+
 def setup():
-	global postUrl
-	if len(sys.argv) == 1:
-		userName="INSERT YOUR HATHWAY EMAIL"
-		password="INSERT YOUR HATHEAY PASSWORD"
-	else:
+	if len(sys.argv) > 1:
 		userName=sys.argv[1]
 		password=sys.argv[2]
 		sleepTime=sys.argv[3]
-	postUrl="http://login.hathway.com/bsp/login.do?action=doLoginSubmit&flowId=UserLogin&username="+userName+"&password="+password
 	
-
-
 def checkInternetConnectivity():
-	conn = httplib.HTTPConnection("www.google.com")
-	conn.request("GET", "/")
-	r1 = conn.getresponse()
-	status=r1.status
-	
-	if status != 302: 
-		return 0
-	else: 
-		return 1
-
+	x = 1
+	try:
+		socket.create_connection( ("www.google.com", 80) )
+	except:
+		x = 0
+	finally:
+		return x
 
 def connectToHathway():
 
-	urllib2.urlopen(postUrl)
+	if len(hostname) == 0:
+		sys.exit(1)
+	else:
+		for host in hostname:
+			real_host = "http://" + host + url
+			try:
+				sys.stdout.write("Trying to authenticate to server %s\n" % (real_host) )
+				urllib2.urlopen(real_host)
+			except:
+				sys.stderr.write("Failed to connect to %s Retrying\n" % (real_host) )
+				continue
 	
-
-
 setup()
 while 1==1:
 	if checkInternetConnectivity() == 0:
+		sys.stderr.write("Internet connectivity is dead. Trying to contact Hathway auth severs.\n")
 		connectToHathway()
 		time.sleep(sleepTime)
 		continue
 	else:
+		sys.stdout.write("Internet connectivity alive. Sleeping for %s seconds.\n" % (sleepTime) )
 		time.sleep(sleepTime)
 		continue 
-		
