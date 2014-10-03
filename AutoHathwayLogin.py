@@ -26,7 +26,7 @@ sleepTime=30
 hostname = ['login.hathway.com', '203.212.193.60', '203.212.193.61']
 
 def setup():
-	global url, sleepTime
+	global url, sleepTime, userName, password
 
 	if len(sys.argv) > 1:
 		userName=sys.argv[1]
