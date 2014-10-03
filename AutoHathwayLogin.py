@@ -22,17 +22,20 @@ userName="USERNAME"
 password="PASSWORD"
 
 sleepTime=30
-socket.setdefaulttimeout(sleepTime)
 
 hostname = ['login.hathway.com', '203.212.193.60', '203.212.193.61']
-url = "/bsp/login.do?action=doLoginSubmit&flowId=UserLogin&username=" + userName + "&password=" + password
 
 def setup():
+	global url, sleepTime, userName, password
+
 	if len(sys.argv) > 1:
 		userName=sys.argv[1]
 		password=sys.argv[2]
-		sleepTime=sys.argv[3]
-	
+		sleepTime=int(sys.argv[3])
+
+	socket.setdefaulttimeout(sleepTime)
+	url = "/bsp/login.do?action=doLoginSubmit&flowId=UserLogin&username=" + userName + "&password=" + password
+
 def checkInternetConnectivity():
 	x = 1
 	try:
