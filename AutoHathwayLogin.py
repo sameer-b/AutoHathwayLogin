@@ -39,7 +39,7 @@ def setup():
 def checkInternetConnectivity():
 	x = 1
 	try:
-		socket.create_connection( ("www.google.com", 80) )
+		socket.create_connection( ("https://www.google.com", 80) )
 	except:
 		x = 0
 	finally:
