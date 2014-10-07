@@ -37,6 +37,18 @@ else:
 	except IOError:
 		print "Couldn't write to file %s\n" % (file);
 
+file=None
+if file is None:
+	#try:
+	fh = open("/tmp/hathway.log", 'w')
+	#except IOError:
+	#	print "Couldn't write to file /tmp/hathway.log";
+else:
+	try:
+		fh = open(file, 'w')
+	except IOError:
+		print "Couldn't write to file %s\n" % (file);
+
 def setup():
 	global url, sleepTime, userName, password
 
@@ -55,6 +67,9 @@ def local_write(str):
 	sys.stdout.write(str)
 	fh.write(str)
 	fh.flush()
+<<<<<<< HEAD
+>>>>>>> da95c3343d8b0554821c6c8756c9b29d155839e0
+=======
 >>>>>>> da95c3343d8b0554821c6c8756c9b29d155839e0
 
 def checkInternetConnectivity():
