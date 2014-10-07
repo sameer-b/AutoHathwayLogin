@@ -22,20 +22,10 @@ userName="USERNAME"
 password="PASSWORD"
 
 sleepTime=30
+socket.setdefaulttimeout(sleepTime)
 
 hostname = ['login.hathway.com', '203.212.193.60', '203.212.193.61']
-
-file=None
-if file is None:
-	#try:
-	fh = open("/tmp/hathway.log", 'w')
-	#except IOError:
-	#	print "Couldn't write to file /tmp/hathway.log";
-else:
-	try:
-		fh = open(file, 'w')
-	except IOError:
-		print "Couldn't write to file %s\n" % (file);
+url = "/bsp/login.do?action=doLoginSubmit&flowId=UserLogin&username=" + userName + "&password=" + password
 
 file=None
 if file is None:
@@ -50,32 +40,20 @@ else:
 		print "Couldn't write to file %s\n" % (file);
 
 def setup():
-	global url, sleepTime, userName, password
-
 	if len(sys.argv) > 1:
 		userName=sys.argv[1]
 		password=sys.argv[2]
-<<<<<<< HEAD
-		sleepTime=int(sys.argv[3])
-
-	socket.setdefaulttimeout(sleepTime)
-	url = "/bsp/login.do?action=doLoginSubmit&flowId=UserLogin&username=" + userName + "&password=" + password
-=======
 		sleepTime=sys.argv[3]
 	
 def local_write(str):
 	sys.stdout.write(str)
 	fh.write(str)
 	fh.flush()
-<<<<<<< HEAD
->>>>>>> da95c3343d8b0554821c6c8756c9b29d155839e0
-=======
->>>>>>> da95c3343d8b0554821c6c8756c9b29d155839e0
 
 def checkInternetConnectivity():
 	x = 1
 	try:
-		socket.create_connection( ("https://www.google.com", 80) )
+		socket.create_connection( ("www.google.com", 80) )
 	except:
 		x = 0
 	finally:
